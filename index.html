@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resets.css">
+    <link rel="stylesheet" href="resets.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Creepster&display=swap&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500"
+        rel="stylesheet">
+    <script type="module" src="script.js"></script>
+    <title>Pet Cemetary</title>
+</head>
+
+<body>
+    <h1>Pet Cemetary</h1>
+    <!-- <section class="pets">
+    </section> -->
+    <!-- <article>
+            <img id="image" src="https://unsplash.it/300/200" alt="">
+            <h2 id="name">Bøllemis</h2>
+            <h3><span id="species">Cat</span>: <span id="race"></span></h3>
+            <h4 id="traits">Traits: <span>Bølle, mis</span></h4>
+            <h4 id="activityLevel">Activitylevel: <span>2</span></h4>
+            <h4 id="dob">Born: <span>10.10.2001</span></h4>
+            <h4 id="isAlive">Alive: <span>Yes</span></h4>
+        </article> -->
+    <section class="form-section">
+        <form class="form" action="">
+            <h2>Add pet to Cemetary</h2>
+            <fieldset class="group">
+                <label for="pet-name" class="label" name="name">Pet name</label>
+                <input type="text" id="pet-name" name="name">
+                <label for="pet-species" class="label" name="species">Pet species</label>
+                <input type="text" id="pet-species" name="species">
+                <label for="pet-race" class="label" name="race">Pet race</label>
+                <input type="text" id="pet-race" name="race">
+                <label for="pet-traits" class="label" name="traits">Pet traits</label>
+                <input type="text-area" id="pet-traits" name="traits">
+            </fieldset>
+            <fieldset class="group">
+                <label for="pet-activitylevel" class="label" name=activitylevels">Pet activitylevel</label>
+                <select name="activitylevel" id="pet-activitylevel">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="pet-dob" class="label" name="dob">Pet date of birth</label>
+                <input type="date" id="pet-dob" name="dob">
+            </fieldset>
+
+            <!-- <label for="pet-name" class="label" name="name">Is the pet alive</label>
+            <input type="radio" id="pet-alive" name="alive">
+            <input type="radio" id="pet-alive" name="alive"> -->
+
+            <fieldset class="group">
+                <legend class="title">Is the pet alive?</legend>
+                <label for="pet-alive" class="label">Yes</label>
+                <input id="pet-alive" type="radio" value="Alive" name="alive" checked />
+                <label for="pet-dead" class="label">No</label>
+                <input id="pet-dead" type="radio" value="Dead" name="alive" />
+            </fieldset>
+
+            <button type="submit">Enter pet</button>
+        </form>
+    </section>
+
+</body>
+
+<template>
+    <article class="pet-card" data-status="">
+        <img src="https://unsplash.it/300/200" alt="">
+        <h2 id="name"></h2>
+        <h3 id="species"></h3>
+        <h4 id="race">gråmis</h4>
+        <h4 id="-pet-traits"><span id="was">Is:</span> <span id="traits"></span></h4>
+        <h4 id="activityLevel">Activitylevel: <span></span></h4>
+        <h4 id="dob">Born: <span></span></h4>
+        <h4 id="isAlive">Currently alive: <span></span></h4>
+        <div class="actions">
+            <button data-id="" data-action="delete">Delete</button>
+            <button data-id="" data-action="update">Update</button>
+        </div>
+    </article>
+</template>
+
+</html>
