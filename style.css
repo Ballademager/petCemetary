@@ -19,7 +19,16 @@
   --yellow: #ffff00;
   --pale-yellow: #ffff89;
   --paler-yellow: #ebebae;
+
+  accent-color: var(--yellow);
+
+  --checkmark: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M20 6L9 17l-5-5"/></svg>');
+
+  --x: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text font-size='90' y='1em'>❌</text></svg>") right 3px top 50% / auto 80% no-repeat;
+
+  --v: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text font-size='90' y='1em'>✅</text></svg>") right 3px top 50% / auto 80% no-repeat;
 }
+
 body {
   font-family: var(--ff-text);
   background: var(--charcoal);
@@ -63,6 +72,10 @@ article {
   }
   #dob {
     margin-top: 0.4rem;
+    & span:last-child {
+      font-size: 24px;
+      font-weight: var(--fw-b);
+    }
   }
   #name {
     font-size: 30px;
@@ -79,6 +92,7 @@ article {
   }
   & img {
     object-fit: cover;
+    aspect-ratio: 3/2;
   }
   .actions {
     margin-block: 1rem;
@@ -135,6 +149,8 @@ button:hover {
 
 /* --form-- */
 .form {
+  display: grid;
+
   margin: 2rem 1rem;
   padding: 1rem;
   width: min-content;
@@ -143,7 +159,12 @@ button:hover {
   border: 2px solid var(--olivegreen);
   color: var(--paler-yellow);
 }
-
+.form h2 {
+  /* justify-self: center; */
+  /* border: 2px solid var(--olivegreen); */
+  margin-bottom: 0.5rem;
+  /* text-align: center; */
+}
 .group {
   margin-block: 1rem;
   /* width: min-content; */
@@ -152,7 +173,111 @@ button:hover {
   border: 2px solid var(--olivegreen);
 }
 
-fieldset:last-of-type {
+.grid-5x2 {
+  margin-block: 0rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.2rem;
+  justify-items: center;
+}
+
+.label {
+  margin-block: 1rem 0.5rem;
+}
+fieldset {
+  margin-inline: 0;
+}
+
+.order {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  place-items: center start;
+  margin-bottom: 1rem;
+
+  .label {
+    margin-top: 0.5rem;
+    order: -1;
+  }
 }
+
+button[type="submit"] {
+  background: var(--olivegreen);
+  color: var(--pale-yellow);
+  border: 2px solid var(--pale-yellow);
+  padding: 0.3rem 1.2rem;
+  margin-top: 1rem;
+  justify-self: start;
+}
+
+::placeholder {
+  color: var(--light-grey);
+  font-style: italic;
+  font-size: 14px;
+}
+.form-wrapper {
+  background: var(--dark-grey);
+  margin-inline: 1rem;
+  margin-bottom: 1rem;
+  container: form-wrap / inline-size;
+  resize: horizontal;
+  overflow: hidden;
+}
+
+:is(input, textarea):is(:focus, :focus-visible) {
+  outline: 2px solid blue;
+}
+input:focus,
+input:focus-visible {
+  /* outline: 2px solid yellow; */
+}
+input:focus {
+  outline: rgb(44, 44, 255) 2px solid;
+}
+
+input:required:not(:focus, :placeholder-shown) {
+  border-color: red;
+  /* background: var(--x); */
+}
+
+input:valid:required {
+  border-color: green;
+  /* background: var(--v); */
+}
+
+input:not([type="radio"], [type="date"]):valid:not(:focus, :placeholder-shown) {
+  border-color: green;
+  /* background: var(--v); */
+}
+
+/* til resets eller her?*/
+:root {
+  --theme-color: 258 29% 43%;
+  --accent-color: 180 50% 43%;
+}
+
+input:is(*) {
+  /* font: inherit; */
+  font-size: max(16px, 1em);
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid hsl(var(--theme-color));
+}
+
+input:is(:focus-visible, :hover) {
+  border-color: hsl(var(--accent-color));
+}
+
+input:is([type="checkbox"], [type="radio"]) {
+  /* appearance: none; */
+  /* custom styling */
+}
+
+/* form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: grid;
+  gap: .3125rem;
+} */

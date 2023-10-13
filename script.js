@@ -8,6 +8,10 @@ async function showPets() {
   pets.forEach((pet) => {
     const template = document.querySelector("template").content;
     const copy = template.cloneNode(true);
+    const deleteButton = copy.querySelector("button[data-action='delete']");
+    deleteButton.dataset.id = pet.id;
+    const updateButton = copy.querySelector("button[data-action='update']");
+    updateButton.dataset.id = pet.id;
 
     copy.querySelector("#name").textContent = pet.name;
     copy.querySelector("#species").textContent = pet.species;
@@ -19,19 +23,24 @@ async function showPets() {
       copy.querySelector("#activityLevel span").textContent = "0";
       copy.querySelector("#was").textContent = "Was:";
     }
-    copy.querySelector("#dob span").textContent = pet.dob;
+
+    copy.querySelector("#dob span:first-child").textContent = `${pet.name} is `;
+    copy.querySelector("#dob span:last-child").textContent = new Date().getFullYear() - pet.dob.slice(0, 4);
+    // copy.querySelector("#dob span").textContent = pet.dob;
     if (!pet.isAlive) {
       console.log(pet.id, "is dead");
       copy.querySelector(".pet-card").dataset.status = "dead";
-      copy.querySelector("#isAlive span").textContent = "NO";
+      copy.querySelector("#isAlive span").textContent = "DEAD";
+      updateButton.textContent = "Revive";
     } else {
-      copy.querySelector("#isAlive span").textContent = "Yeps";
+      copy.querySelector("#isAlive span").textContent = "Alive";
+      updateButton.textContent = "Kill";
     }
-
-    const deleteButton = copy.querySelector("button[data-action='delete']");
-    deleteButton.dataset.id = pet.id;
-    const updateButton = copy.querySelector("button[data-action='update']");
-    updateButton.dataset.id = pet.id;
+    if (pet.image) {
+      copy.querySelector("img").src = pet.image;
+    } else {
+      copy.querySelector("img").src = "https://picsum.photos/id/237/300/200";
+    }
 
     deleteButton.addEventListener("click", async (e) => {
       await deletePet(pet.id);
@@ -40,7 +49,7 @@ async function showPets() {
 
     updateButton.addEventListener("click", async (e) => {
       console.log(pet.id, "skal opdateres");
-      await updatePet(pet.id);
+      await updatePet(pet.id, !pet.isAlive);
       showPets();
     });
 
@@ -49,4 +58,41 @@ async function showPets() {
 }
 
 showPets();
-// addPet();
+
+const form = document.querySelector(".form");
+
+form.addEventListener("submit", async (e) => {
+  console.log("submitted");
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  let alive = true;
+  if (formData.get("isAlive") == "Dead") {
+    alive = false;
+  }
+
+  const newPet = {
+    name: formData.get("name"),
+    species: formData.get("species"),
+    race: formData.get("race"),
+    dob: formData.get("dob"),
+    // fallback date of birth eller standardinput hvis der ikke skrives noget eller required felt
+    activityLevel: formData.get("activityLevel"),
+    isAlive: alive,
+    traits: formData.get("traits").split("\n"),
+    image: formData.get("image"),
+  };
+  console.log("det nye dyr er", newPet);
+
+  await addPet(newPet);
+});
+// {
+//     name: "Piphans",
+//     species: "Swallow",
+//     race: "Blue swallow",
+//     dob: "2001-04-09",
+//     traits: ["injured", "recovering"],
+//     isAlive: true,
+//     activityLevel: 3,
+//     image: "piphans.webp",
+//   }

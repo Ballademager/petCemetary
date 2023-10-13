@@ -18,8 +18,8 @@
 
 <body>
     <h1>Pet Cemetary</h1>
-    <!-- <section class="pets">
-    </section> -->
+    <section class="pets">
+    </section>
     <!-- <article>
             <img id="image" src="https://unsplash.it/300/200" alt="">
             <h2 id="name">Bøllemis</h2>
@@ -30,59 +30,83 @@
             <h4 id="isAlive">Alive: <span>Yes</span></h4>
         </article> -->
     <section class="form-section">
-        <form class="form" action="">
-            <h2>Add pet to Cemetary</h2>
-            <fieldset class="group">
-                <label for="pet-name" class="label" name="name">Pet name</label>
-                <input type="text" id="pet-name" name="name">
-                <label for="pet-species" class="label" name="species">Pet species</label>
-                <input type="text" id="pet-species" name="species">
-                <label for="pet-race" class="label" name="race">Pet race</label>
-                <input type="text" id="pet-race" name="race">
-                <label for="pet-traits" class="label" name="traits">Pet traits</label>
-                <input type="text-area" id="pet-traits" name="traits">
-            </fieldset>
-            <fieldset class="group">
-                <label for="pet-activitylevel" class="label" name=activitylevels">Pet activitylevel</label>
-                <select name="activitylevel" id="pet-activitylevel">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <label for="pet-dob" class="label" name="dob">Pet date of birth</label>
-                <input type="date" id="pet-dob" name="dob">
-            </fieldset>
+        <div class="form-wrapper">
+            <form class="form" action="">
+                <h2>Add a Pet</h2>
+                <fieldset class="group">
+                    <label for="pet-name" class="label" name="name">Pet name:</label>
+                    <input type="text" id="pet-name" name="name" min="" max="" placeholder="Fluffy" required>
+                    <label for="pet-species" class="label" name="species">Pet species:</label>
+                    <input type="text" id="pet-species" name="species" placeholder="Dog" required>
+                    <label for="pet-race" class="label" name="race">Pet race:</label>
+                    <input type="text" id="pet-race" name="race" placeholder="Puddel">
+                    <label for="pet-traits" class="label" name="traits">Pet traits:</label>
+                    <p class=".small">One trait per line</p>
+                    <textarea name="traits" id="pet-traits" cols="30" rows="7" placeholder="Soft"></textarea>
+                    <!-- <input type="text" id="pet-traits" name="traits" placeholder="soft, energetic, happy.."> -->
 
-            <!-- <label for="pet-name" class="label" name="name">Is the pet alive</label>
-            <input type="radio" id="pet-alive" name="alive">
-            <input type="radio" id="pet-alive" name="alive"> -->
+                </fieldset>
+                <fieldset class="group">
+                    <label for="pet-dob" class="label" name="dob">Pet date of birth:</label>
+                    <input type="date" id="pet-dob" name="dob">
+                    <div class="form-group range">
+                        <label for="activity_level">Activity Level</label>
+                        <div class="range-wrap" data-level-min="Low" data-level-max="High">
+                            <input type="range" step="1" min="1" max="5" value="3" list="al" id="activity_level"
+                                name="activityLevel" />
+                            <datalist id="al">
+                                <option value="1"></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <!-- <label for="pet-activitylevel" class="label" name=activitylevel">Pet activitylevel:</label>
+                    <div class="grid-5x2">
+                        <p>1</p>
+                        <p>2</p>
+                        <p>3</p>
+                        <p>4</p>
+                        <p>5</p>
+                        <input type="radio" name="activitylevel" id="a-lvl-1">
+                        <input type="radio" name="activitylevel" id="a-lvl-2">
+                        <input type="radio" name="activitylevel" id="a-lvl-3">
+                        <input type="radio" name="activitylevel" id="a-lvl-4">
+                        <input type="radio" name="activitylevel" id="a-lvl-5">
+                    </div> -->
+                </fieldset>
 
-            <fieldset class="group">
-                <legend class="title">Is the pet alive?</legend>
-                <label for="pet-alive" class="label">Yes</label>
-                <input id="pet-alive" type="radio" value="Alive" name="alive" checked />
-                <label for="pet-dead" class="label">No</label>
-                <input id="pet-dead" type="radio" value="Dead" name="alive" />
-            </fieldset>
-
-            <button type="submit">Enter pet</button>
-        </form>
+                <fieldset class="group">
+                    <legend class="title">Is the pet alive?</legend>
+                    <div class="order">
+                        <label for="pet-alive" class="label">Yes</label>
+                        <input id="pet-alive" type="radio" value="Alive" name="isAlive" checked />
+                        <label for="pet-dead" class="label">No</label>
+                        <input id="pet-dead" type="radio" value="Dead" name="isAlive" />
+                    </div>
+                    <label for="image">Insert image web
+                        address here</label>
+                    <input type="text" name="image" id="image">
+                </fieldset>
+                <button type="submit">Enter pet</button>
+            </form>
+        </div>
     </section>
 
 </body>
 
 <template>
     <article class="pet-card" data-status="">
-        <img src="https://unsplash.it/300/200" alt="">
+        <img src="https://picsum.photos/id/237/300/200" alt="">
         <h2 id="name"></h2>
         <h3 id="species"></h3>
         <h4 id="race">gråmis</h4>
         <h4 id="-pet-traits"><span id="was">Is:</span> <span id="traits"></span></h4>
         <h4 id="activityLevel">Activitylevel: <span></span></h4>
-        <h4 id="dob">Born: <span></span></h4>
-        <h4 id="isAlive">Currently alive: <span></span></h4>
+        <h4 id="dob"><span></span><span></span> years old</h4>
+        <h4 id="isAlive"><span data-status></span></h4>
         <div class="actions">
             <button data-id="" data-action="delete">Delete</button>
             <button data-id="" data-action="update">Update</button>

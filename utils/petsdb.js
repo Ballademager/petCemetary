@@ -7,7 +7,7 @@ export async function getPets() {
     apikey: myApiKey,
   };
 
-  let response = await fetch(myUrl + "pets", {
+  let response = await fetch(myUrl + "pets?order=created_at", {
     method: "GET",
     headers: headersList,
   });
@@ -17,24 +17,15 @@ export async function getPets() {
   return data;
 }
 
-export async function addPet() {
+export async function addPet(data) {
   let headersList = {
-    Accept: "*/*",
+    Accept: "application/json",
     apikey: myApiKey,
     Prefer: "return=representation",
     "Content-Type": "application/json",
   };
 
-  let bodyContent = JSON.stringify({
-    name: "Piphans",
-    species: "Swallow",
-    race: "Blue swallow",
-    dob: "2001-04-09",
-    traits: ["injured", "recovering"],
-    isAlive: true,
-    activityLevel: 3,
-    image: "piphans.webp",
-  });
+  let bodyContent = JSON.stringify(data);
 
   let response = await fetch(myUrl + "pets", {
     method: "POST",
@@ -42,9 +33,9 @@ export async function addPet() {
     headers: headersList,
   });
 
-  let data = await response.json();
-  console.log(data);
-  return data;
+  let answer = await response.json();
+  //   console.log(answer);
+  return answer;
 }
 
 export async function deletePet(id) {
@@ -63,7 +54,7 @@ export async function deletePet(id) {
   return data;
 }
 
-export async function updatePet(id) {
+export async function updatePet(id, nextState) {
   let headersList = {
     apikey: myApiKey,
     Prefer: "return=representation",
@@ -71,7 +62,8 @@ export async function updatePet(id) {
   };
 
   let bodyContent = JSON.stringify({
-    isAlive: false,
+    //isAlive: false,
+    isAlive: nextState,
   });
 
   let response = await fetch(myUrl + "pets?id=eq." + id, {
